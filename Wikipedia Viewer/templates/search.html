@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
+
+    <title>WIKI</title>
+
+    <style>
+      body{
+        background-color: #e84118;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .search-box{
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: #2f3640;
+        height: 60px;
+        border-radius: 40px;
+        padding: 10px;
+      }
+
+
+      .search-box:hover > .search-btn{
+        background-color: white;
+      }
+
+      .search-btn{
+        color: #e84118;
+        float: right;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #2f3640;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+      }
+      .search-txt{
+        border: none;
+        background: none;
+        outline: none;
+        padding: 0;
+        color: white;
+        float: left;
+        font-size: 16px;
+        font-family: Georgia;
+        transition: 0.4s;
+        line-height: 40px;
+        width: 240px;
+      }
+      .content{
+        padding-top: 15%;
+        padding-left: 10px;
+
+
+      }
+      .links{
+        color: #2f3640;
+        font-family: Georgia;
+      }
+      .links:hover {
+        color: #353b48;
+        font-family: Georgia;
+
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #2f3640;">
+
+      <a class="navbar-brand text-danger" href="{{url_for('index')}}">
+
+          <i class="fab fa-wikipedia-w"></i>
+
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-danger" href="https://en.wikipedia.org/wiki/Special:Random" style="font-family: Georgia" target="_blank">Random Article<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+
+  <form method="POST" action="{{url_for('search')}}">
+    <div class="search-box" >
+      <input class="search-txt" type="text" name="search" placeholder="{{search}}">
+      <button class ="search-btn">
+      <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </form>
+
+
+
+  <div class ="content">
+		<ul>
+      {% if length %}
+      <p style="font-family: Georgia; font-size: 20px; color:#2f3640;"><b> Results for: {{search}}</b></p>
+  			{% for i in range(length) %}
+  			<a class ="links" style="font-size: 21px; font-family: Georgia" target="_blank" href="{{url_links[i]}}"><strong>{{title[i]}}</strong> <br> {{desc[i]}} <br></a>
+  			{% endfor %}
+      {% else %}
+        <p style="font-family: Georgia; font-size: 20px; color:#2f3640; padding-left:40px;"><b> Zero Result for {{search}}. Try using some different search query.</b></p>
+      {% endif %}
+		</ul>
+	</div>
+
+
+  <footer class="page-footer" style="font-family: Georgia; font-size: 16px; color: #2f3640; margin-top:100px; margin-left:900px;">
+
+     <cite title="Source Title">-PRIYANSHI
+     </cite>
+
+   </footer>
+  </body>
+</html>
